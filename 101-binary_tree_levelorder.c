@@ -1,7 +1,7 @@
 #include "binary_trees.h"
 
 /**
- * create_node - Creates a new levelorder_queue_t node.
+ * create_node - Creates a new node.
  * @node: The binary tree node for the new node to contain.
  *
  * Return: A pointer to the new node, or NULL on failure.
@@ -21,30 +21,30 @@ levelorder_queue_t *create_node(binary_tree_t *node)
 }
 
 /**
- * free_queue - Frees a levelorder_queue_t queue.
+ * free_queue - Frees a queue.
  * @head: A pointer to the head of the queue.
  */
 void free_queue(levelorder_queue_t *head)
 {
-	levelorder_queue_t *tmp;
+	levelorder_queue_t *temp;
 
 	while (head != NULL)
 	{
-		tmp = head->next;
+		temp = head->next;
 		free(head);
-		head = tmp;
+		head = temp;
 	}
 }
 
 /**
- * pint_push - Runs a function on a given binary tree node and
- *             pushes its children into a levelorder_queue_t queue.
+ * push_queue - Runs a function on a given binary tree node and
+ *             pushes its children into a queue.
  * @node: The binary tree node to process and push.
  * @queue: A double pointer to the head of the queue.
  * @tail: A double pointer to the tail of the queue.
  * @func: A pointer to the function to call on the node's value.
  */
-void pint_push(binary_tree_t *node, levelorder_queue_t **queue,
+void push_queue(binary_tree_t *node, levelorder_queue_t **queue,
 		levelorder_queue_t **tail, void (*func)(int))
 {
 	levelorder_queue_t *new;
@@ -75,16 +75,16 @@ void pint_push(binary_tree_t *node, levelorder_queue_t **queue,
 }
 
 /**
- * pop - Pops the head of a levelorder_queue_t queue.
+ * pop_head - Pops the head of a queue.
  * @head: A double pointer to the head of the queue.
  */
-void pop(levelorder_queue_t **head)
+void pop_head(levelorder_queue_t **head)
 {
-	levelorder_queue_t *tmp;
+	levelorder_queue_t *temp;
 
-	tmp = (*head)->next;
+	temp = (*head)->next;
 	free(*head);
-	*head = tmp;
+	*head = temp;
 }
 
 /**
@@ -106,7 +106,7 @@ void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 
 	while (queue != NULL)
 	{
-		pint_push(queue->node, &queue, &tail, func);
-		pop(&queue);
+		push_queue(queue->node, &queue, &tail, func);
+		pop_head(&queue);
 	}
 }
