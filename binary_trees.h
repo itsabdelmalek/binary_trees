@@ -78,5 +78,6 @@ avl_t *avl_insert(avl_t **tree, int value);
 avl_t *bst_balance(avl_t *tree);
 avl_t *insert_avl_recursive(avl_t *tree, int value);
 avl_t *array_to_avl(int *array, size_t size);
+avl_t *avl_remove(avl_t *root, int value);
 
 #endif /* _BINARY_TREES_H_ */
